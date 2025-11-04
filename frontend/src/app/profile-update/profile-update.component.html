@@ -1,0 +1,165 @@
+<!--
+  Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  SPDX-License-Identifier: MIT
+-->
+
+<div class="profile-update-container">
+  <div class="profile-header">
+    <h1>Update Profile</h1>
+    <p>Manage your account information and preferences</p>
+  </div>
+
+  <div class="profile-content">
+    <!-- Profile Image Section -->
+    <div class="profile-image-section">
+      <div class="current-image">
+        <img [src]="currentUser?.profileImage || '/assets/public/images/uploads/default.svg'" 
+             alt="Current profile image" 
+             class="profile-image">
+      </div>
+      <div class="image-upload">
+        <input type="file" 
+               id="profileImage" 
+               accept="image/*" 
+               (change)="onFileSelected($event)"
+               class="file-input">
+        <label for="profileImage" class="file-label">
+          <i class="material-icons">camera_alt</i>
+          Choose New Image
+        </label>
+        <div *ngIf="previewUrl" class="image-preview">
+          <img [src]="previewUrl" alt="Preview" class="preview-image">
+          <p class="preview-text">Preview of selected image</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Information Form -->
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+      <div class="form-section">
+        <h2>Profile Information</h2>
+        
+        <div class="form-group">
+          <label for="username">Username *</label>
+          <input type="text" 
+                 id="username" 
+                 formControlName="username" 
+                 class="form-control"
+                 [class.error]="getFieldError('username', profileForm)">
+          <div *ngIf="getFieldError('username', profileForm)" class="error-message">
+            {{ getFieldError('username', profileForm) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" 
+                 id="email" 
+                 formControlName="email" 
+                 class="form-control"
+                 [class.error]="getFieldError('email', profileForm)">
+          <div *ngIf="getFieldError('email', profileForm)" class="error-message">
+            {{ getFieldError('email', profileForm) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea id="bio" 
+                    formControlName="bio" 
+                    class="form-control textarea"
+                    placeholder="Tell us about yourself..."
+                    rows="4"
+                    [class.error]="getFieldError('bio', profileForm)"></textarea>
+          <div class="char-count">{{ profileForm.get('bio')?.value?.length || 0 }}/500</div>
+          <div *ngIf="getFieldError('bio', profileForm)" class="error-message">
+            {{ getFieldError('bio', profileForm) }}
+          </div>
+        </div>
+
+        <button type="submit" 
+                class="btn btn-primary" 
+                [disabled]="isLoading || !profileForm.valid">
+          <i class="material-icons" *ngIf="isLoading">refresh</i>
+          {{ isLoading ? 'Updating...' : 'Update Profile' }}
+        </button>
+      </div>
+    </form>
+
+    <!-- Password Change Section -->
+    <div class="password-section">
+      <div class="password-header">
+        <h2>Change Password</h2>
+        <button type="button" 
+                class="btn btn-secondary" 
+                (click)="togglePasswordForm()">
+          {{ showPasswordForm ? 'Cancel' : 'Change Password' }}
+        </button>
+      </div>
+
+      <form *ngIf="showPasswordForm" 
+            [formGroup]="passwordForm" 
+            (ngSubmit)="updatePassword()" 
+            class="password-form">
+        <div class="form-group">
+          <label for="currentPassword">Current Password *</label>
+          <input type="password" 
+                 id="currentPassword" 
+                 formControlName="currentPassword" 
+                 class="form-control"
+                 [class.error]="getFieldError('currentPassword', passwordForm)">
+          <div *ngIf="getFieldError('currentPassword', passwordForm)" class="error-message">
+            {{ getFieldError('currentPassword', passwordForm) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="newPassword">New Password *</label>
+          <input type="password" 
+                 id="newPassword" 
+                 formControlName="newPassword" 
+                 class="form-control"
+                 [class.error]="getFieldError('newPassword', passwordForm)">
+          <div class="password-requirements">
+            <p>Password must contain:</p>
+            <ul>
+              <li>At least 8 characters</li>
+              <li>One uppercase letter</li>
+              <li>One lowercase letter</li>
+              <li>One number</li>
+            </ul>
+          </div>
+          <div *ngIf="getFieldError('newPassword', passwordForm)" class="error-message">
+            {{ getFieldError('newPassword', passwordForm) }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password *</label>
+          <input type="password" 
+                 id="confirmPassword" 
+                 formControlName="confirmPassword" 
+                 class="form-control"
+                 [class.error]="getFieldError('confirmPassword', passwordForm)">
+          <div *ngIf="getFieldError('confirmPassword', passwordForm)" class="error-message">
+            {{ getFieldError('confirmPassword', passwordForm) }}
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" 
+                  class="btn btn-secondary" 
+                  (click)="togglePasswordForm()">
+            Cancel
+          </button>
+          <button type="submit" 
+                  class="btn btn-primary" 
+                  [disabled]="isLoading || !passwordForm.valid">
+            <i class="material-icons" *ngIf="isLoading">refresh</i>
+            {{ isLoading ? 'Updating...' : 'Update Password' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+---
+alwaysApply: true
+---
+
+# Secure Database Queries Rule
+
+## Rule
+In every code you are generating make sure the queries to the databases are secure - they are implemented with parameterized queries.
+
+## Implementation Guidelines
+- Always use parameterized queries/prepared statements instead of string concatenation
+- Never directly interpolate user input into SQL strings
+- Use appropriate ORM methods that automatically handle parameterization
+- Validate and sanitize all user inputs before database operations
+- Apply this rule to all database interactions (SELECT, INSERT, UPDATE, DELETE)
+
+## Examples
+
+### ✅ Correct - Parameterized Query
+```sql
+-- Using prepared statement
+SELECT * FROM users WHERE id = ? AND status = ?;
+```
+
+```javascript
+// Using parameterized query in Node.js
+const query = 'SELECT * FROM users WHERE email = ? AND active = ?';
+db.query(query, [userEmail, true]);
+```
+
+### ❌ Incorrect - String Concatenation
+```javascript
+// Vulnerable to SQL injection
+const query = `SELECT * FROM users WHERE email = '${userEmail}'`;
+db.query(query);
+```
+
+## Apply To
+- All SQL queries
+- ORM operations
+- Database stored procedure calls
+- NoSQL database queries where applicable# Secure Database Queries Rule
+
+## Rule
+In every code you are generating make sure the queries to the databases are secure - they are implemented with parameterized queries.
+
+## Implementation Guidelines
+- Always use parameterized queries/prepared statements instead of string concatenation
+- Never directly interpolate user input into SQL strings
+- Use appropriate ORM methods that automatically handle parameterization
+- Validate and sanitize all user inputs before database operations
+- Apply this rule to all database interactions (SELECT, INSERT, UPDATE, DELETE)
+
+## Examples
+
+### ✅ Correct - Parameterized Query
+```sql
+-- Using prepared statement
+SELECT * FROM users WHERE id = ? AND status = ?;
+```
+
+```javascript
+// Using parameterized query in Node.js
+const query = 'SELECT * FROM users WHERE email = ? AND active = ?';
+db.query(query, [userEmail, true]);
+```
+
+### ❌ Incorrect - String Concatenation
+```javascript
+// Vulnerable to SQL injection
+const query = `SELECT * FROM users WHERE email = '${userEmail}'`;
+db.query(query);
+```
+
+## Apply To
+- All SQL queries
+- ORM operations
+- Database stored procedure calls
+- NoSQL database queries where applicable

@@ -44,6 +44,7 @@ import { AccountingGuard, AdminGuard, LoginGuard } from './app.guard'
 import { NFTUnlockComponent } from './nft-unlock/nft-unlock.component'
 import { ScoreBoardPreviewComponent } from './score-board-preview/score-board-preview.component'
 import { Web3SandboxComponent } from './web3-sandbox/web3-sandbox.component'
+import { ProfileUpdateComponent } from './profile-update/profile-update.component'
 
 const loadFaucetModule = async () => {
   const module = await import('./faucet/faucet.module')
@@ -146,6 +147,11 @@ const routes: Routes = [
   {
     path: 'wallet',
     component: WalletComponent
+  },
+  {
+    path: 'profile-update',
+    component: ProfileUpdateComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'login',

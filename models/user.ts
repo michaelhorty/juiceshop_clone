@@ -30,6 +30,7 @@ InferCreationAttributes<User>
   declare deluxeToken: CreationOptional<string>
   declare lastLoginIp: CreationOptional<string>
   declare profileImage: CreationOptional<string>
+  declare bio: CreationOptional<string>
   declare totpSecret: CreationOptional<string>
   declare isActive: CreationOptional<boolean>
 }
@@ -109,6 +110,18 @@ const UserModelInit = (sequelize: Sequelize) => { // vuln-code-snippet start wea
       profileImage: {
         type: DataTypes.STRING,
         defaultValue: '/assets/public/images/uploads/default.svg'
+      },
+      bio: {
+        type: DataTypes.TEXT,
+        defaultValue: '',
+        set (bio: string) {
+          if (!utils.disableOnContainerEnv()) {
+            bio = security.sanitizeLegacy(bio)
+          } else {
+            bio = security.sanitizeSecure(bio)
+          }
+          this.setDataValue('bio', bio)
+        }
       },
       totpSecret: {
         type: DataTypes.STRING,

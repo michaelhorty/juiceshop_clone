@@ -26,6 +26,7 @@ export interface User extends Model {
   role: string
   deletedFlag?: boolean
   profileImage?: string
+  bio?: string
   securityQuestion?: {
     id: number
     answer: string

@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+# Cryptography and Hashing Policy
+
+## Password Security
+- *PROHIBITED:* Under no circumstances should MD5 or SHA-1 be used for hashing passwords or any sensitive secrets. These algorithms are cryptographically broken.
+- *REQUIRED:* For password hashing, you MUST use the bcrypt library. It automatically handles salting and uses a configurable work factor to remain resistant to brute-force attacks over time.
+- When generating a password hashing function, you must also provide a corresponding verification function.
+- In your response, explicitly state that you are using bcrypt in accordance with this security policy.

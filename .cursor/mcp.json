@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+      "ox-security": {
+        "command": "npx",
+        "args": [
+          "mcp-remote@0.1.2",
+          "https://api.cloud.ox.security/api/mcp",
+          "--header",
+          "Authorization:ox_FaxaZTNucRsuIyEA1wzeIt8PbjxZQmFkJnN7"
+        ],
+        "env": {
+          "AUTH_TOKEN": "ox_FaxaZTNucRsuIyEA1wzeIt8PbjxZQmFkJnN7"
+        }
+      },
+      "git": {
+        "command": "mcp-server-git",
+        "args": []
+      }
+    }
+  }

@@ -78,4 +78,18 @@ export class UserService {
   upgradeToDeluxe (paymentMode: string, paymentId: any) {
     return this.http.post(this.hostServer + '/rest/deluxe-membership', { paymentMode, paymentId }).pipe(map((response: any) => response.data), catchError((err) => { throw err }))
   }
+
+  updateProfile (profileData: any) {
+    return this.http.put(this.hostServer + '/rest/user/profile', profileData).pipe(
+      map((response: any) => response),
+      catchError((err) => { throw err })
+    )
+  }
+
+  uploadProfilePicture (formData: FormData) {
+    return this.http.post(this.hostServer + '/profile/image/file', formData).pipe(
+      map((response: any) => response),
+      catchError((err) => { throw err })
+    )
+  }
 }

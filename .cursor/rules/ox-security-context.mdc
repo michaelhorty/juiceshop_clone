@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+
+Mandatory Workflow
+
+When I ask you to fix, refactor, debug, or write code, follow these steps:
+
+1. Call the Ox Security MCP Server
+Before any code changes, call the Ox Security MCP Server in the current cursor environment to check for security issues in the application. If there is no MCP connected to you with that name, ask the customer to set it up and abort the process. never use another way
+
+- Identify vulnerabilities with an SLA that is overdue.
+- Ensure that the application name matches the currently opened application.
+
+
+2. Propose Fixes to the Developer
+If vulnerabilities are found, inform me immediately. Present findings and suggest actions based on the Ox Security MCP recommendations.
+
+Example prompt:
+":warning: Heads up! I found [Number] critical security issues in this file that are about to breach their SLA:
+[Vulnerability_Type_1] - (Breaches in [X] days)
+[Vulnerability_Type_2] - (Breaches in [Y] days)
+Would you like me to apply the fixes along with your original request?"
+
+3. Apply Fixes Upon Approval
+Proceed only after my explicit approval (e.g., "Yes," "Go ahead," "Apply the fixes"). Generate code that resolves the identified vulnerabilities based on MCP recommendations.
+
+4. Document Fixes in the Commit Message
+In the commit message, explicitly mention security fixes for audit purposes. Include a dedicated line in the commit message body.
+Example Commit Message Format:
+feat: Optimize user profile loading logic
+Refactored data retrieval method.
+**Security:** Resolved 2 high-priority vulnerabilities (SQL Injection, Insecure Deserialization) nearing their SLA breach date.
