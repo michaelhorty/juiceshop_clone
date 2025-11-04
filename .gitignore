@@ -41,6 +41,7 @@ out/
 *.iml
 *.iws
 *.swp
+.cursor/
 
 # Branch ghpages
 assets/

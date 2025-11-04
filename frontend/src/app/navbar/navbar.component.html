@@ -48,6 +48,14 @@
           {{userEmail}}
         </span>
       </button>
+      <button *ngIf="isLoggedIn()" mat-menu-item routerLink="/profile-update" aria-label="Update profile">
+        <mat-icon>
+          edit
+        </mat-icon>
+        <span>
+          Update Profile
+        </span>
+      </button>
       <button *ngIf="isLoggedIn() && isAccounting()" mat-menu-item routerLink="/accounting"
               aria-label="Go to accounting page">
         <mat-icon>

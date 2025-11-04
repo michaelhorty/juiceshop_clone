@@ -103,6 +103,7 @@ const basketItems = require('./routes/basketItems')
 const saveLoginIp = require('./routes/saveLoginIp')
 const userProfile = require('./routes/userProfile')
 const updateUserProfile = require('./routes/updateUserProfile')
+const profileUpdate = require('./routes/profileUpdate')
 const videoHandler = require('./routes/videoHandler')
 const twoFactorAuth = require('./routes/2fa')
 const languageList = require('./routes/languages')
@@ -614,7 +615,9 @@ restoreOverwrittenFilesWithOriginals().then(() => {
 
   /* Routes for profile page */
   app.get('/profile', security.updateAuthenticatedUsers(), userProfile())
-  app.post('/profile', updateUserProfile())
+  app.post('/profile', updateUserProfile.upload.single('profileImage'), updateUserProfile())
+  app.post('/rest/user/profile', updateUserProfile.upload.single('profileImage'), updateUserProfile())
+  app.put('/rest/user/profile', security.appendUserId(), profileUpdate())
 
   /* Route for vulnerable code snippets */
   app.get('/snippets', vulnCodeSnippet.serveChallengesWithCodeSnippet())
