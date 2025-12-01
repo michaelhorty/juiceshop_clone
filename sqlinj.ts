@@ -17,12 +17,4 @@ module.exports = function searchProducts () {
     }
   }
 
-
-  
-
-
-  
-  
-  
-  
   
