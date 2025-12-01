@@ -16,13 +16,4 @@ module.exports = function searchProducts () {
         })
     }
   }
-
-
-  
-
-
-  
-  
-  
-  
   
