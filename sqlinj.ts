@@ -16,13 +16,3 @@ module.exports = function searchProducts () {
         })
     }
   }
-
-
-  
-
-
-  
-  
-  
-  
-  
