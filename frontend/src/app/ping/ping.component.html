@@ -1,0 +1,51 @@
+<!--
+  ~ Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+  -->
+
+<div fxLayoutAlign="center">
+  <mat-card class="mat-elevation-z6">
+    <h1>Ping</h1>
+    <p class="hint">Enter an IP address to check reachability from the server (TCP probe).</p>
+
+    <div class="form-container">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>IP address</mat-label>
+        <input
+          id="pingIp"
+          [formControl]="ipControl"
+          matInput
+          type="text"
+          placeholder="8.8.8.8"
+          aria-label="IP address to ping"
+          (keyup.enter)="runPing()"
+        />
+        <mat-error *ngIf="ipControl.invalid && ipControl.errors?.required">
+          IP address is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      type="submit"
+      id="pingButton"
+      mat-raised-button
+      color="primary"
+      [disabled]="ipControl.invalid || loading"
+      (click)="runPing()"
+      aria-label="Run ping"
+    >
+      <mat-icon>network_check</mat-icon>
+      {{ loading ? 'Pinging…' : 'Ping' }}
+    </button>
+
+    <div *ngIf="error" class="error-box" role="alert">
+      {{ error }}
+    </div>
+
+    <div *ngIf="output" class="result-box">
+      <h2>Results for {{ lastIp }}</h2>
+      <pre id="pingOutput">{{ output }}</pre>
+    </div>
+  </mat-card>
+</div>

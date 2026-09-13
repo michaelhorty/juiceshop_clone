@@ -1,0 +1,98 @@
+<!--
+  ~ Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ SPDX-License-Identifier: MIT
+  -->
+
+<div fxLayoutAlign="center">
+  <mat-card class="mat-elevation-z6">
+    <h1>DNS Lookup</h1>
+    <p class="hint">Enter a hostname to look up with dig on the server.</p>
+
+    <div class="form-container">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Hostname</mat-label>
+        <input
+          id="dnsHostname"
+          [formControl]="hostnameControl"
+          matInput
+          type="text"
+          placeholder="example.com"
+          aria-label="Hostname for DNS lookup"
+          (keyup.enter)="runLookup()"
+        />
+        <mat-error *ngIf="hostnameControl.invalid && hostnameControl.errors?.required">
+          Hostname is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      type="submit"
+      id="dnsLookupButton"
+      mat-raised-button
+      color="primary"
+      [disabled]="hostnameControl.invalid || loading"
+      (click)="runLookup()"
+      aria-label="Run DNS lookup"
+    >
+      <mat-icon>dns</mat-icon>
+      {{ loading ? 'Looking up…' : 'Lookup' }}
+    </button>
+
+    <div *ngIf="error" class="error-box" role="alert">
+      {{ error }}
+    </div>
+
+    <div *ngIf="output" class="result-box">
+      <h2>Results for {{ lastHostname }}</h2>
+      <pre id="dnsLookupOutput">{{ output }}</pre>
+    </div>
+
+    <mat-divider class="section-divider"></mat-divider>
+
+    <h2>Reverse DNS Lookup</h2>
+    <p class="hint">Enter an IP address to look up with <code>dig -x</code> on the server.</p>
+
+    <div class="form-container">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>IP address</mat-label>
+        <input
+          id="reverseDnsIp"
+          [formControl]="ipControl"
+          matInput
+          type="text"
+          placeholder="8.8.8.8"
+          aria-label="IP address for reverse DNS lookup"
+          (keyup.enter)="runReverseLookup()"
+        />
+        <mat-error *ngIf="ipControl.invalid && ipControl.errors?.required">
+          IP address is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button
+      type="submit"
+      id="reverseDnsLookupButton"
+      mat-raised-button
+      color="primary"
+      [disabled]="ipControl.invalid || reverseLoading"
+      (click)="runReverseLookup()"
+      aria-label="Run reverse DNS lookup"
+    >
+      <mat-icon>swap_horiz</mat-icon>
+      {{ reverseLoading ? 'Looking up…' : 'Reverse lookup' }}
+    </button>
+
+    <div *ngIf="reverseError" class="error-box" role="alert">
+      {{ reverseError }}
+    </div>
+
+    <div *ngIf="reverseOutput" class="result-box">
+      <h2>Results for {{ lastIp }}</h2>
+      <p class="resolved-ip"><strong>IP address:</strong> {{ lastIp }}</p>
+      <p class="resolved-hostname"><strong>Hostname (PTR):</strong> {{ reverseHostname }}</p>
+      <pre id="reverseDnsLookupOutput">{{ reverseOutput }}</pre>
+    </div>
+  </mat-card>
+</div>
