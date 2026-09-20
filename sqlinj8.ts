@@ -27,4 +27,4 @@ module.exports = function searchProducts () {
   
   
   
-  
+  // no-op comment: re-trigger OX PR scan for OX Security Gate deck screenshot (2026-09-20T13:38:04Z)
