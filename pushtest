@@ -4,3 +4,5 @@ Doing a PUSH here
 OX Security Gate deck: pass-scenario evidence branch (no vulnerable content added)
 
 OX Security Gate deck: PR-scenario evidence branch
+
+retry: re-trigger fresh PR scan 2026-09-20T14:11:41Z
