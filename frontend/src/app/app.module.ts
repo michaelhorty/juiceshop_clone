@@ -142,6 +142,8 @@ import { CodeAreaComponent } from './code-area/code-area.component'
 import { NgxTextDiffModule } from 'ngx-text-diff'
 import { CodeFixesComponent } from './code-fixes/code-fixes.component'
 import { ProfileUpdateComponent } from './profile-update/profile-update.component'
+import { DnsLookupComponent } from './dns-lookup/dns-lookup.component'
+import { PingComponent } from './ping/ping.component'
 
 export function HttpLoaderFactory (http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json')
@@ -206,7 +208,9 @@ export function HttpLoaderFactory (http: HttpClient) {
     CodeSnippetComponent,
     CodeAreaComponent,
     CodeFixesComponent,
-    ProfileUpdateComponent
+    ProfileUpdateComponent,
+    DnsLookupComponent,
+    PingComponent
   ],
   imports: [
     BrowserModule,

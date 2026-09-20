@@ -222,6 +222,22 @@
       {{"LABEL_PHOTO_WALL" | translate}}
     </span>
   </a>
+  <a mat-list-item routerLink="/dns-lookup" (click)="onToggleSidenav()" aria-label="Go to DNS lookup">
+    <i class="material-icons">
+      dns
+    </i>
+    <span class="menu-text truncate">
+      DNS Lookup
+    </span>
+  </a>
+  <a mat-list-item routerLink="/ping" (click)="onToggleSidenav()" aria-label="Go to Ping">
+    <i class="material-icons">
+      network_check
+    </i>
+    <span class="menu-text truncate">
+      Ping
+    </span>
+  </a>
   <a mat-list-item *ngIf="isLoggedIn()" routerLink="/deluxe-membership" (click)="onToggleSidenav()" aria-label="Go to deluxe membership page">
     <i class="material-icons">
       card_membership
